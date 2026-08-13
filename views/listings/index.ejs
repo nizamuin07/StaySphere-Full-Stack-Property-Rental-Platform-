@@ -1,0 +1,229 @@
+<% layout("/layouts/boilerplate") %>
+
+<span class="section-tag">
+    ✨ StaySphere Collection
+</span>
+
+<h2 class="page-title">
+    Discover Your Perfect Stay
+</h2>
+
+<p class="page-subtitle">
+    Handpicked homes, villas & unique stays for unforgettable experiences.
+</p>
+
+
+<!-- ================= SEARCH BAR ================= -->
+
+<div class="search-bar">
+
+    <div class="search-item">
+        <i class="fa-solid fa-location-dot"></i>
+
+        <div>
+            <small>Where</small>
+            <span>Anywhere</span>
+        </div>
+    </div>
+
+
+    <div class="search-divider"></div>
+
+
+    <div class="search-item">
+        <i class="fa-regular fa-calendar"></i>
+
+        <div>
+            <small>When</small>
+            <span>Any week</span>
+        </div>
+    </div>
+
+
+    <div class="search-divider"></div>
+
+
+    <div class="search-item">
+        <i class="fa-solid fa-user-group"></i>
+
+        <div>
+            <small>Who</small>
+            <span>Add guests</span>
+        </div>
+    </div>
+
+
+    <button class="search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+</div>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<div class="category-bar">
+
+    <div class="category-item">
+        🏠
+        <span>All</span>
+    </div>
+
+
+    <a href="/listings?category=Beach" class="category-item">
+        🏖️
+        <span>Beach</span>
+    </a>
+
+
+    <div class="category-item">
+        🏔️
+        <span>Mountains</span>
+    </div>
+
+
+    <div class="category-item">
+        🏡
+        <span>Villas</span>
+    </div>
+
+
+    <div class="category-item">
+        🏕️
+        <span>Camping</span>
+    </div>
+
+
+    <div class="category-item">
+        🌊
+        <span>Lake</span>
+    </div>
+
+
+    <div class="category-item">
+        🏙️
+        <span>Iconic Cities</span>
+    </div>
+
+
+    <div class="category-item">
+        🌳
+        <span>Countryside</span>
+    </div>
+
+
+    <div class="category-item">
+        ✨
+        <span>Unique Stays</span>
+    </div>
+
+</div>
+
+
+<!-- ================= MAP TOGGLE ================= -->
+
+<div class="map-toggle">
+
+    <span>Show Map</span>
+
+    <label class="switch">
+
+        <input
+            type="checkbox"
+            id="mapToggle"
+        >
+
+        <span class="slider"></span>
+
+    </label>
+
+</div>
+
+
+
+
+<!-- ================= LISTINGS ================= -->
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4 mt-3">
+
+    <% for (let listing of allistings) { %>
+
+        <div class="col">
+
+            <a
+                href="/listings/<%= listing._id %>"
+                class="listing-Link"
+            >
+
+                <div class="card listing-card">
+
+
+                    <!-- LISTING IMAGE -->
+
+                    <div class="listing-image-container">
+
+                        <img
+                            class="card-img-top"
+                            src="<%= listing.image.url %>"
+                            alt="listing_image"
+                        >
+
+
+                        <!-- WISHLIST -->
+
+                        <button
+                            class="wishlist-btn"
+                            type="button"
+                        >
+                            ♡
+                        </button>
+
+                    </div>
+
+
+                    <!-- LISTING DETAILS -->
+
+                    <div class="card-body">
+
+                        <div class="listing-heading">
+
+                            <h5 class="card-title">
+
+                                <%= listing.location %>,
+                                <%= listing.country %>
+
+                            </h5>
+
+
+                            <span class="listing-rating">
+                                ★ 4.8
+                            </span>
+
+                        </div>
+
+
+                        <p class="card-text listing-title">
+
+                            <%= listing.title %>
+
+                        </p>
+
+
+                        <p class="card-text text-muted">
+
+                            ₹ <%= listing.price.toLocaleString("en-IN") %>
+                            night
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    <% } %>
+
+</div>

@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold" href="/">
+            <i class="fa-regular fa-compass me-2"></i>StaySphere
+        </a>
+
+        <!-- Toggle Button -->
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+            <!-- Left -->
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/listings">Explore</a>
+
+                <% if(currUser){ %>
+                    <a class="nav-link" href="/listings/new">Add Listing</a>
+                <% } %>
+            </div>
+
+            <!-- Right -->
+            <div class="navbar-nav ms-auto align-items-center">
+
+                <% if(!currUser){ %>
+
+                    <a class="btn btn-outline-danger rounded-pill px-3 me-2"
+                       href="/login">
+                        Log In
+                    </a>
+
+                    <a class="btn btn-danger rounded-pill px-3"
+                       href="/signup">
+                        Sign Up
+                    </a>
+
+                <% } %>
+
+                <% if(currUser){ %>
+
+                    <span class="me-3 text-secondary">
+                        <i class="fa-regular fa-user"></i>
+                        <%= currUser.username %>
+                    </span>
+
+                    <a class="btn btn-outline-dark rounded-pill px-3"
+                       href="/logout">
+                        <i class="fa-solid fa-right-from-bracket me-1"></i>
+                        Log Out
+                    </a>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>

@@ -1,0 +1,290 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="listing-header">
+
+    <span
+        class="badge rounded-pill bg-light text-dark px-3 py-2 mb-3"
+        style="font-size: 15px;"
+    >
+        ✨ StaySphere
+    </span>
+
+    <h1 class="fw-bold mb-1">
+        Edit your Listing
+    </h1>
+
+    <p class="text-muted mb-4">
+        Update your property details and keep your listing up to date.
+    </p>
+
+</div>
+
+
+<div class="card border-0 shadow-sm rounded-4">
+
+    <div class="card-body p-4 p-md-5">
+
+        <form
+            method="POST"
+            action="/listings/<%= listing._id %>?_method=PUT"
+            enctype="multipart/form-data"
+            novalidate
+            class="needs-validation"
+        >
+
+            <!-- Title -->
+            <div class="mb-4">
+
+                <label
+                    for="title"
+                    class="form-label fw-semibold text-dark"
+                >
+                    Listing Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="listing[title]"
+                    value="<%= listing.title %>"
+                    class="form-control form-control-lg"
+                    placeholder="e.g. Luxury Villa with Ocean View"
+                    required
+                >
+
+                <div class="valid-feedback">
+                    Title looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter a title for your listing.
+                </div>
+
+            </div>
+
+
+            <!-- Description -->
+            <div class="mb-4">
+
+                <label
+                    for="description"
+                    class="form-label fw-semibold text-dark"
+                >
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="listing[description]"
+                    class="form-control"
+                    rows="5"
+                    placeholder="Tell guests what makes this place special..."
+                    required
+                ><%= listing.description %></textarea>
+
+                <div class="invalid-feedback">
+                    Please enter a short description.
+                </div>
+
+            </div>
+
+
+            <!-- Image Upload -->
+<div class="mb-4">
+
+    <label
+        for="image"
+        class="form-label fw-semibold text-dark"
+    >
+        Current Property Image
+    </label>
+
+    <!-- Current Image Preview -->
+    <div class="mb-3">
+
+        <img
+            src="<%= listing.image.url %>"
+            alt="Current property image"
+            class="img-fluid rounded-4 shadow-sm"
+            style="
+                width: 220px;
+                height: 150px;
+                object-fit: cover;
+            "
+        >
+
+    </div>
+
+
+    <label
+        for="image"
+        class="form-label fw-semibold text-dark"
+    >
+        Upload New Image
+    </label>
+
+    <div
+        class="p-4 rounded-4 border bg-light"
+        style="border: 2px dashed #dee2e6 !important;"
+    >
+
+        <div class="text-center mb-3">
+
+            <div
+                class="mx-auto mb-2 d-flex align-items-center justify-content-center rounded-circle"
+                style="
+                    width:60px;
+                    height:60px;
+                    background:#ffe9ec;
+                    color:#ff385c;
+                    font-size:25px;
+                "
+            >
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+
+            <h6 class="fw-bold text-dark mb-1">
+                Upload a new property image
+            </h6>
+
+            <small class="text-muted">
+                Choose a new image only if you want to replace the current one
+            </small>
+
+        </div>
+
+        <input
+            type="file"
+            id="image"
+            name="listing[image][url]"
+            class="form-control"
+        >
+
+    </div>
+
+</div>
+
+            <!-- Price + Country -->
+            <div class="row">
+
+                <div class="col-md-4 mb-4">
+
+                    <label
+                        for="price"
+                        class="form-label fw-semibold text-dark"
+                    >
+                        Price / Night
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text bg-dark text-white">
+                            &#8377;
+                        </span>
+
+                        <input
+                            type="number"
+                            id="price"
+                            name="listing[price]"
+                            value="<%= listing.price %>"
+                            class="form-control"
+                            placeholder="1200"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please enter a valid price.
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-8 mb-4">
+
+                    <label
+                        for="country"
+                        class="form-label fw-semibold text-dark"
+                    >
+                        Country
+                    </label>
+
+                    <input
+                        type="text"
+                        id="country"
+                        name="listing[country]"
+                        value="<%= listing.country %>"
+                        class="form-control"
+                        placeholder="India"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter the country name.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Location -->
+            <div class="mb-4">
+
+                <label
+                    for="location"
+                    class="form-label fw-semibold text-dark"
+                >
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    name="listing[location]"
+                    value="<%= listing.location %>"
+                    class="form-control"
+                    placeholder="Jaipur, Rajasthan"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Please enter the property location.
+                </div>
+
+            </div>
+
+
+            <!-- Divider -->
+            <hr class="my-4">
+
+
+            <!-- Submit -->
+            <div class="d-flex justify-content-left">
+
+                <button
+                    type="submit"
+                    class="btn btn-dark btn-lg px-4 rounded-pill"
+                >
+                    <i class="fa-solid fa-pen-to-square me-2"></i>
+                    Update Listing
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .listing-header {
+        padding: 10px 0 5px 0;
+    }
+
+</style>
