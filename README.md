@@ -43,12 +43,6 @@ The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS
 * Image preview while editing listings
 * Cloudinary integration for image management
 
-### 🗺️ Location & Maps
-
-* Location-based property information
-* Map integration using Mapbox
-* Property location visualization
-
 ### ⭐ Reviews & Ratings
 
 * Users can add reviews to properties
@@ -105,7 +99,6 @@ The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS
 ### Cloud Services
 
 * Cloudinary – Image Storage
-* Mapbox – Maps & Location
 * MongoDB Atlas – Cloud Database
 * Render – Deployment
 
