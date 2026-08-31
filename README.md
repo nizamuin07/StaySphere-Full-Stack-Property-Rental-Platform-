@@ -317,29 +317,6 @@ Production services used:
 
 ---
 
-## 📸 Screenshots
-
-### Home Page
-
-*Add screenshot here*
-
-### Explore Listings
-
-*Add screenshot here*
-
-### Property Details
-
-*Add screenshot here*
-
-### Add Listing
-
-*Add screenshot here*
-
-### User Authentication
-
-*Add screenshot here*
-
----
 
 ## 🚀 Future Improvements
 
