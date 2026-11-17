@@ -59,7 +59,7 @@ The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS
 * Matching suggestions appear on property detail pages
 * Google Maps search links open in a separate tab
 * Restaurant information is not live; confirm current details before visiting
-* Destination-themed illustrations are bundled locally as fallback artwork, not photographs of the venues
+* Unique, locally stored Unsplash food photos illustrate the cuisine and are not photos of the individual venues
 
 ### ❤️ User Experience
 
