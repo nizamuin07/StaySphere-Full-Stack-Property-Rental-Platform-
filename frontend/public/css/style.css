@@ -1,0 +1,804 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    background-color: #fff !important;
+    min-height: 5rem;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222 !important;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* ================= FOOTER ================= */
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-info-social,
+.f-info-brand {
+    width: 100%;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    background: #ebebeb;
+    height: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* ================= LISTING CARDS ================= */
+
+.listing-Link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.listing-card:hover {
+    transform: translateY(-3px);
+}
+
+.listing-card .card-body {
+    padding: 0 !important;
+}
+
+.listing-card .card-img-top {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 1rem !important;
+}
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+.show-img {
+    height: 30vh;
+    object-fit: cover;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btns {
+    display: flex;
+}
+
+/* ================= REVIEW CARDS ================= */
+
+.review-card {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+}
+
+.review-card .card-body {
+    padding: 1rem !important;
+}
+
+.review-card .card-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.review-card .card-text {
+    font-size: 1rem;
+    color: #444;
+}
+
+.review-card .badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+}
+
+.review-card hr {
+    margin: 0.8rem 0;
+}
+
+/* ================= RATING SUMMARY ================= */
+
+.rating-summary {
+    margin: 40px auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.progress {
+    height: 12px;
+    border-radius: 20px;
+}
+
+.progress-bar {
+    border-radius: 20px;
+}
+@media (max-width: 767px) {
+    .navbar-collapse {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.5rem 0;
+    }
+}
+/* ================= PAGE HEADER ================= */
+
+.page-header{
+    margin-bottom:2rem;
+}
+
+.section-tag{
+    display:inline-block;
+    background:#ffe8ea;
+    color:#fe424d;
+    padding:8px 16px;
+    border-radius:50px;
+    font-size:.85rem;
+    font-weight:700;
+    letter-spacing:.5px;
+    margin-bottom:12px;
+}
+
+.page-title{
+    font-size:2.2rem;
+    font-weight:800;
+    color:#222;
+    line-height:1.2;
+    margin-bottom:8px;
+}
+
+.page-subtitle{
+    font-size:1rem;
+    color:#6c757d;
+    max-width:600px;
+    line-height:1.6;
+}
+/* ================= HOME PAGE ================= */
+
+.hero{
+    background: linear-gradient(135deg,#fe424d,#ff6b6b);
+    color:white;
+    text-align:center;
+    padding:90px 30px;
+    border-radius:20px;
+}
+
+.hero h1{
+    font-size:3rem;
+    font-weight:800;
+}
+
+.hero p{
+    font-size:1.1rem;
+    max-width:650px;
+    margin:20px auto;
+    opacity:.95;
+}
+
+.hero .btn{
+    padding:12px 28px;
+    border-radius:50px;
+    font-weight:600;
+}
+
+.stats h2{
+    color:#fe424d;
+    font-size:2.5rem;
+    font-weight:800;
+}
+
+.stats p{
+    color:#666;
+    font-size:1rem;
+}
+
+@media(max-width:768px){
+
+.hero{
+    padding:60px 20px;
+}
+
+.hero h1{
+    font-size:2.2rem;
+}
+
+}
+.new-listing-header {
+    position: sticky;
+    top: 70px;
+    z-index: 10;
+    background: white;
+    padding: 20px 0;
+}
+
+/* ================= AIRBNB STYLE CATEGORIES ================= */
+
+.category-bar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    scrollbar-width: none;
+}
+
+.category-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.category-item {
+    min-width: 80px;
+    text-align: center;
+    color: #555;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.category-item.active {
+    color: #222;
+    border-bottom-color: #222;
+}
+
+.category-item:hover {
+    color: #222;
+    border-bottom-color: #222;
+}
+
+.category-item span {
+    display: block;
+    margin-top: 0.4rem;
+}
+
+
+/* ================= AIRBNB LISTING CARD ================= */
+
+.listing-image-container {
+    position: relative;
+}
+
+.listing-image-container img {
+    display: block;
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+
+/* Wishlist */
+
+.wishlist-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    background: transparent;
+    border: none;
+
+    color: white;
+    font-size: 2rem;
+    line-height: 1;
+
+    cursor: pointer;
+
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.wishlist-btn.is-favorite {
+    color: #fe424d;
+}
+
+.listing-card-details {
+    display: block;
+    padding: 0 0.15rem;
+}
+
+.listing-search {
+    display: grid;
+    grid-template-columns: minmax(200px, 2fr) repeat(3, minmax(130px, 1fr)) auto;
+    align-items: end;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid #e6e6e6;
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.listing-search-field label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.listing-search-field input,
+.listing-search-field select {
+    width: 100%;
+    min-height: 42px;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid #d5d5d5;
+    border-radius: 0.6rem;
+    background: #fff;
+}
+
+.listing-search-button {
+    min-height: 42px;
+    border-radius: 0.6rem;
+}
+
+.listing-results-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.favorites-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.empty-state {
+    margin: 2rem 0;
+    padding: 2rem;
+    border: 1px solid #e6e6e6;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.listing-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.listing-detail-image img {
+    display: block;
+    width: 100%;
+    max-height: 560px;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.listing-detail-price {
+    font-size: 1.15rem;
+}
+
+.restaurant-recommendations {
+    padding: 1.25rem;
+    border: 1px solid #e6e6e6;
+    border-radius: 1rem;
+    background: #fff;
+}
+
+.restaurant-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #e6e6e6;
+    border-radius: 0.8rem;
+    background: #fff;
+}
+
+.restaurant-recommendations .restaurant-card {
+    margin-top: 0.65rem;
+}
+
+.restaurant-destinations {
+    display: grid;
+    gap: 2rem;
+}
+
+.restaurant-card-large {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+}
+
+.restaurant-photo {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.restaurant-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.restaurant-card-large .restaurant-card-content {
+    padding: 1.15rem 1.25rem 0.25rem;
+}
+
+.restaurant-card-large > .btn {
+    margin: 0 1.25rem 1.15rem !important;
+}
+
+.restaurant-thumbnail {
+    flex: 0 0 72px;
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 0.65rem;
+}
+
+.destination-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 1.5rem 0;
+}
+
+.destination-filter a {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    color: #222;
+    text-decoration: none;
+}
+
+.destination-filter a.active,
+.destination-filter a:hover {
+    border-color: #222;
+    background: #222;
+    color: #fff;
+}
+
+.home-feature-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+    padding: 1.25rem;
+    border: 1px solid #e6e6e6;
+    border-radius: 1rem;
+    color: inherit;
+    text-decoration: none;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.home-feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.home-feature-card > span {
+    font-size: 2rem;
+}
+
+.home-feature-card h3 {
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+}
+
+.home-feature-card p {
+    margin: 0;
+    color: #6c757d;
+}
+
+@media (max-width: 991px) {
+    .listing-search {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .listing-search-button {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 575px) {
+    .listing-search {
+        grid-template-columns: 1fr;
+    }
+
+    .listing-results-heading,
+    .listing-detail-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* Listing heading */
+
+.listing-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.8rem;
+}
+
+.listing-heading .card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+    color: #222;
+}
+
+.listing-rating {
+    font-size: 0.9rem;
+    color: #222;
+    white-space: nowrap;
+}
+
+
+/* Listing title */
+
+.listing-title {
+    color: #717171;
+    font-size: 0.9rem;
+    margin: 0.3rem 0;
+}
+
+
+/* Price */
+
+.listing-card .text-muted {
+    color: #222 !important;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+
+/* Mobile */
+
+@media (max-width: 767px) {
+
+    .category-bar {
+        gap: 1.3rem;
+    }
+
+    .listing-image-container img {
+        height: 18rem;
+    }
+
+}
+
+/* ================= AIRBNB SEARCH BAR ================= */
+
+.search-bar {
+    width: 100%;
+    max-width: 760px;
+    height: 66px;
+
+    margin: 30px auto;
+
+    display: flex;
+    align-items: center;
+
+    background: #ffffff;
+
+    border: 1px solid #dddddd;
+    border-radius: 40px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+
+    padding: 5px 6px;
+
+    transition: box-shadow 0.2s ease;
+}
+
+.search-bar:hover {
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+/* Each section */
+
+.search-item {
+    flex: 1;
+
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 22px;
+
+    cursor: pointer;
+
+    border-radius: 35px;
+
+    gap: 12px;
+
+    transition: background 0.2s ease;
+}
+
+.search-item:hover {
+    background: #f7f7f7;
+}
+
+
+/* Icons */
+
+.search-item > i {
+    font-size: 1.1rem;
+    color: #222;
+}
+
+
+/* Text */
+
+.search-item small {
+    display: block;
+
+    font-size: 0.72rem;
+
+    font-weight: 700;
+
+    color: #222;
+
+    margin-bottom: 2px;
+}
+
+.search-item span {
+    display: block;
+
+    font-size: 0.9rem;
+
+    color: #717171;
+}
+
+
+/* Dividers */
+
+.search-divider {
+    width: 1px;
+    height: 32px;
+
+    background: #dddddd;
+}
+
+
+/* Search button */
+
+.search-btn {
+    width: 52px;
+    height: 52px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #fe424d;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.1rem;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease,
+                background 0.2s ease;
+}
+
+.search-btn:hover {
+    background: #e31c2a;
+    transform: scale(1.05);
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    .search-bar {
+        max-width: 95%;
+        height: auto;
+
+        flex-direction: column;
+
+        border-radius: 25px;
+
+        padding: 8px;
+    }
+
+    .search-item {
+        width: 100%;
+    }
+
+    .search-divider {
+        width: 90%;
+        height: 1px;
+    }
+
+    .search-btn {
+        width: 100%;
+        height: 45px;
+        border-radius: 20px;
+        margin-top: 5px;
+    }
+}
+

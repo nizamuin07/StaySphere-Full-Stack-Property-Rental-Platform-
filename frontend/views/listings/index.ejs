@@ -1,0 +1,114 @@
+<% layout("/layouts/boilerplate") %>
+
+<header class="page-header">
+    <span class="section-tag">StaySphere Collection</span>
+    <h1 class="page-title">Discover your perfect stay</h1>
+    <p class="page-subtitle">
+        Search distinctive homes and narrow your options by destination, category, and nightly budget.
+    </p>
+</header>
+
+<form class="listing-search" action="/listings" method="GET">
+    <div class="listing-search-field">
+        <label for="q">Destination or keyword</label>
+        <input id="q" name="q" type="search" value="<%= filters.q %>"
+               placeholder="Try Goa, cabin, or beach">
+    </div>
+    <div class="listing-search-field">
+        <label for="minPrice">Min price / night</label>
+        <input id="minPrice" name="minPrice" type="number" min="0" step="1"
+               value="<%= filters.minPrice === undefined ? '' : filters.minPrice %>" placeholder="Any">
+    </div>
+    <div class="listing-search-field">
+        <label for="maxPrice">Max price / night</label>
+        <input id="maxPrice" name="maxPrice" type="number" min="0" step="1"
+               value="<%= filters.maxPrice === undefined ? '' : filters.maxPrice %>" placeholder="Any">
+    </div>
+    <div class="listing-search-field">
+        <label for="sort">Sort by</label>
+        <select id="sort" name="sort">
+            <option value="newest" <%= filters.sort === "newest" ? "selected" : "" %>>Newest</option>
+            <option value="price-low" <%= filters.sort === "price-low" ? "selected" : "" %>>Price: low to high</option>
+            <option value="price-high" <%= filters.sort === "price-high" ? "selected" : "" %>>Price: high to low</option>
+        </select>
+    </div>
+    <% if (filters.category) { %>
+        <input type="hidden" name="category" value="<%= filters.category %>">
+    <% } %>
+    <button class="btn btn-danger listing-search-button" type="submit">
+        <i class="fa-solid fa-magnifying-glass me-2" aria-hidden="true"></i>Search
+    </button>
+</form>
+
+<nav class="category-bar" aria-label="Filter by stay category">
+    <a class="category-item <%= filters.category ? '' : 'active' %>" href="/listings">
+        <span aria-hidden="true">⌂</span><span>All stays</span>
+    </a>
+    <% for (const category of categories) { %>
+        <a class="category-item <%= filters.category === category.value ? 'active' : '' %>"
+           href="/listings?category=<%= encodeURIComponent(category.value) %>">
+            <span aria-hidden="true"><%= category.icon %></span>
+            <span><%= category.label %></span>
+        </a>
+    <% } %>
+</nav>
+
+<div class="listing-results-heading">
+    <p class="mb-0"><strong id="visibleListingCount"><%= allistings.length %></strong>
+        <span id="visibleListingNoun"><%= allistings.length === 1 ? "stay" : "stays" %></span> found
+    </p>
+    <label class="favorites-filter" for="favoritesOnly">
+        <input id="favoritesOnly" type="checkbox">
+        Show saved stays
+    </label>
+</div>
+<p id="favoritesStatus" class="visually-hidden" role="status" aria-live="polite"></p>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4 mt-1" id="listingResults">
+    <% for (const listing of allistings) { %>
+        <div class="col listing-result" data-listing-id="<%= listing._id %>">
+            <article class="card listing-card h-100">
+                <div class="listing-image-container">
+                    <a href="/listings/<%= listing._id %>" class="listing-Link"
+                       aria-label="View <%= listing.title %>">
+                        <img class="card-img-top" src="<%= listing.image.url %>" alt="<%= listing.title %>" loading="lazy">
+                    </a>
+                    <button class="wishlist-btn" type="button" data-listing-id="<%= listing._id %>"
+                            data-listing-title="<%= listing.title %>"
+                            aria-label="Save <%= listing.title %>" aria-pressed="false">♡</button>
+                </div>
+                <a href="/listings/<%= listing._id %>" class="listing-Link listing-card-details">
+                    <div class="listing-heading">
+                        <h2 class="card-title"><%= listing.location %>, <%= listing.country %></h2>
+                        <% if (listing.reviews.length) { %>
+                            <% const rating = listing.reviews.reduce((total, review) => total + review.rating, 0) / listing.reviews.length; %>
+                            <span class="listing-rating" aria-label="Rated <%= rating.toFixed(1) %> out of 5">
+                                <i class="fa-solid fa-star" aria-hidden="true"></i> <%= rating.toFixed(1) %>
+                            </span>
+                        <% } else { %>
+                            <span class="listing-rating text-muted">New</span>
+                        <% } %>
+                    </div>
+                    <p class="listing-title"><%= listing.title %></p>
+                    <p class="listing-price">
+                        <strong>₹<%= listing.price.toLocaleString("en-IN") %></strong> night
+                        <% if (listing.category) { %><span> · <%= listing.category %></span><% } %>
+                    </p>
+                </a>
+            </article>
+        </div>
+    <% } %>
+</div>
+
+<div id="noFavoritesMessage" class="empty-state" hidden>
+    <h2>No saved stays yet</h2>
+    <p>Tap the heart on a stay to add it to your favorites.</p>
+</div>
+
+<% if (!allistings.length) { %>
+    <div class="empty-state">
+        <h2>No stays match those filters</h2>
+        <p>Try a different destination, category, or price range.</p>
+        <a class="btn btn-outline-dark rounded-pill" href="/listings">Clear filters</a>
+    </div>
+<% } %>

@@ -1,0 +1,58 @@
+<% layout("/layouts/boilerplate") %>
+
+<header class="page-header">
+    <span class="section-tag">Curated dining ideas</span>
+    <h1 class="page-title">Restaurants for your trip</h1>
+    <p class="page-subtitle">
+        Browse selected dining suggestions in Goa, Manali, and Jaipur. These are sample recommendations,
+        not live listings; food photos illustrate the cuisine and are not photos of the individual venues.
+    </p>
+</header>
+
+<nav class="destination-filter" aria-label="Filter restaurants by destination">
+    <a href="/restaurants" class="<%= selectedDestination ? '' : 'active' %>">All destinations</a>
+    <% for (const destination of destinations) { %>
+        <a href="/restaurants?destination=<%= encodeURIComponent(destination.name) %>"
+           class="<%= selectedDestination && selectedDestination.name === destination.name ? 'active' : '' %>">
+            <%= destination.name %>
+        </a>
+    <% } %>
+</nav>
+
+<div class="restaurant-destinations">
+    <% const visibleDestinations = selectedDestination ? [selectedDestination] : destinations; %>
+    <% for (const destination of visibleDestinations) { %>
+        <section class="restaurant-destination">
+            <div class="d-flex justify-content-between align-items-end flex-wrap gap-2 mb-3">
+                <div>
+                    <span class="section-tag">Destination</span>
+                    <h2 class="h3 mb-0"><%= destination.name %></h2>
+                </div>
+                <a class="text-dark" href="/listings?q=<%= encodeURIComponent(destination.name) %>">
+                    Find a stay in <%= destination.name %>
+                </a>
+            </div>
+            <div class="row g-3">
+                <% for (const restaurant of destination.restaurants) { %>
+                    <div class="col-md-6 col-xl-4">
+                        <article class="restaurant-card restaurant-card-large h-100">
+                            <img class="restaurant-photo" src="<%= restaurant.image.url %>"
+                                 alt="<%= restaurant.image.alt %>" loading="lazy">
+                            <div class="restaurant-card-content">
+                                <h3 class="h5"><%= restaurant.name %></h3>
+                                <p class="mb-1"><%= restaurant.cuisine %></p>
+                                <p class="text-muted mb-0"><i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i><%= restaurant.area %></p>
+                            </div>
+                            <a class="btn btn-outline-dark btn-sm rounded-pill mt-3"
+                               href="https://www.google.com/maps/search/?api=1&amp;query=<%= encodeURIComponent(restaurant.name + ' ' + restaurant.area + ' ' + destination.name) %>"
+                               target="_blank" rel="noopener noreferrer">
+                                View on Maps
+                                <i class="fa-solid fa-arrow-up-right-from-square ms-1" aria-hidden="true"></i>
+                            </a>
+                        </article>
+                    </div>
+                <% } %>
+            </div>
+        </section>
+    <% } %>
+</div>

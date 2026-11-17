@@ -2,7 +2,7 @@
 
 StaySphere is a full-stack property rental and property listing web application inspired by modern vacation-rental platforms. It allows users to explore properties, create listings, upload property images, manage their own listings, write reviews, and discover properties through categories and location-based features.
 
-The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS** with authentication, authorization, image management, reviews, and map integration.
+The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS** with authentication, listing management, reviews, and curated restaurant discovery.
 
 ---
 
@@ -32,9 +32,11 @@ The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS
   * Villas
   * Camping
   * Lake
-  * Iconic Cities
+  * Cities
   * Countryside
   * Unique Stays
+* Search by destination or keyword; filter by category and nightly budget
+* Sort by newest or nightly price
 
 ### 🖼️ Image Upload & Management
 
@@ -45,17 +47,26 @@ The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS
 
 ### ⭐ Reviews & Ratings
 
-* Users can add reviews to properties
+* Signed-in users can add reviews to properties
 * Star-based ratings
-* Review deletion
+* Review authors can delete their own reviews
 * Reviews displayed on property detail pages
+* Property ratings are calculated from submitted reviews
+
+### 🍽️ Restaurant Discovery
+
+* Curated sample restaurant suggestions for Goa, Manali, and Jaipur
+* Matching suggestions appear on property detail pages
+* Google Maps search links open in a separate tab
+* Restaurant information is not live; confirm current details before visiting
+* Destination-themed illustrations are bundled locally as fallback artwork, not photographs of the venues
 
 ### ❤️ User Experience
 
 * Responsive interface
 * Clean navigation
 * Category-based exploration
-* Favorite/heart-style property interaction
+* Browser-local saved stays
 * User-friendly listing cards
 * Responsive property detail pages
 
@@ -122,13 +133,13 @@ The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS
                                   ▼
                          ┌──────────────────┐
                          │   Express.js     │
-                         │      Server      │
+                         │    Backend       │
                          └────────┬─────────┘
                                   │
                     ┌─────────────┼─────────────┐
                     │             │             │
                     ▼             ▼             ▼
-                Routes         Models        Middleware
+              Routes → Controllers → Models
                     │             │             │
                     └─────────────┼─────────────┘
                                   │
@@ -141,8 +152,8 @@ The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS
                     ┌─────────────┴─────────────┐
                     │                           │
                     ▼                           ▼
-              Cloudinary                    Mapbox
-            Image Storage                 Location Maps
+              Cloudinary                 Google Maps
+            Image Storage             Restaurant Search
 ```
 
 ---
@@ -152,40 +163,29 @@ The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS
 ```text
 StaySphere/
 │
-├── init/
-│   ├── data.js
-│   └── index.js
-│
-├── models/
-│   ├── listing.js
-│   ├── review.js
-│   └── user.js
-│
-├── routes/
-│   ├── listing.js
-│   ├── review.js
-│   └── user.js
-│
-├── views/
-│   ├── includes/
-│   ├── layouts/
-│   ├── listings/
-│   ├── users/
-│   ├── error.ejs
-│   └── home.ejs
-│
-├── public/
-│   ├── css/
-│   └── js/
-│
-├── utils/
-│   ├── ExpressError.js
-│   └── wrapAsync.js
-│
-├── app.js
-├── cloudConfig.js
-├── middleware.js
-├── schema.js
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── seed/
+│   ├── tests/
+│   ├── utils/
+│   ├── validation/
+│   └── app.js
+├── frontend/
+│   ├── public/
+│   │   ├── css/
+│   │   └── js/
+│   └── views/
+│       ├── includes/
+│       ├── layouts/
+│       ├── listings/
+│       ├── restaurants/
+│       └── users/
+├── server.js
+├── .env.example
 ├── package.json
 ├── package-lock.json
 ├── .gitignore
@@ -211,32 +211,32 @@ npm install
 
 ### 3. Configure Environment Variables
 
-Create a `.env` file in the root directory.
+Create a `.env` file in the root directory using `.env.example` as a reference.
 
 Example:
 
 ```env
-ATLASDB_URL=your_mongodb_atlas_connection_string
+MONGODB_URI=mongodb://127.0.0.1:27017/staysphere_dev
 SECRET=your_session_secret
 
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_KEY=your_cloudinary_api_key
-CLOUDINARY_SECRET=your_cloudinary_api_secret
-
-MAP_TOKEN=your_mapbox_token
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 ```
 
-Do not commit `.env` to GitHub.
+For MongoDB Atlas, set `MONGODB_URI` to your Atlas connection string (or keep using `ATLAS_DB_URL`). `MONGODB_URI` takes precedence for local development. Do not commit `.env` to GitHub.
 
 ---
 
 ## ▶️ Run the Application Locally
 
-Start the development server:
+Start the application:
 
 ```bash
-nodemon app.js
+npm start
 ```
+
+Run the automated tests with `npm test`.
 
 The application will run on:
 
@@ -313,24 +313,18 @@ Production services used:
 * **Render** – Application hosting
 * **MongoDB Atlas** – Cloud database
 * **Cloudinary** – Image hosting
-* **Mapbox** – Maps and location services
+* **Google Maps search links** – Restaurant search by destination
 
 ---
 
 
 ## 🚀 Future Improvements
 
-* Advanced property search
-* Price range filtering
-* Advanced sorting
-* User profile management
-* Wishlist functionality
-* Booking/reservation system
+* Booking and availability management
 * Payment gateway integration
-* Email notifications
-* Improved recommendation system
-* Admin dashboard
-* More advanced responsive UI
+* User profiles and server-synced wishlists
+* Live restaurant discovery through a places provider
+* Email notifications and an admin dashboard
 
 ---
 

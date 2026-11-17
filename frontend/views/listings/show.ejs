@@ -1,0 +1,131 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="listing-detail-header">
+    <div>
+        <p class="text-muted mb-1"><%= listing.location %>, <%= listing.country %></p>
+        <h1 class="page-title"><%= listing.title %></h1>
+        <p class="mb-0">
+            <% if (averageRating !== null) { %>
+                <i class="fa-solid fa-star text-warning" aria-hidden="true"></i>
+                <strong><%= averageRating.toFixed(1) %></strong>
+                · <%= listing.reviews.length %> <%= listing.reviews.length === 1 ? "review" : "reviews" %>
+            <% } else { %>
+                <span class="text-muted">Be the first to review this stay</span>
+            <% } %>
+        </p>
+    </div>
+    <% if (listing.category) { %><span class="badge rounded-pill text-bg-light"><%= listing.category %></span><% } %>
+</div>
+
+<div class="listing-detail-image">
+    <img src="<%= listing.image.url %>" alt="<%= listing.title %>" class="show-img">
+</div>
+
+<div class="row g-5 mt-1">
+    <section class="col-lg-7">
+        <h2 class="h4">Hosted by <%= listing.owner.username %></h2>
+        <p class="text-muted"><%= listing.description %></p>
+        <p class="listing-detail-price">
+            <strong>₹<%= listing.price.toLocaleString("en-IN") %></strong> per night
+        </p>
+        <p><i class="fa-solid fa-location-dot me-2" aria-hidden="true"></i><%= listing.location %>, <%= listing.country %></p>
+
+        <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+            <div class="d-flex gap-2 my-4">
+                <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark rounded-pill px-4">Edit listing</a>
+                <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE"
+                      onsubmit="return confirm('Delete this listing and its reviews?');">
+                    <button class="btn btn-outline-danger rounded-pill px-4" type="submit">Delete listing</button>
+                </form>
+            </div>
+        <% } %>
+
+        <hr class="my-4">
+        <h2 class="h4 mb-3">Guest reviews</h2>
+        <% if (currUser) { %>
+            <form action="/listings/<%= listing._id %>/reviews" method="POST" class="review-form">
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Your rating</label>
+                    <select id="rating" name="review[rating]" class="form-select" required>
+                        <option value="">Choose a rating</option>
+                        <option value="5">5 - Excellent</option>
+                        <option value="4">4 - Great</option>
+                        <option value="3">3 - Good</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="1">1 - Poor</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Your review</label>
+                    <textarea id="comment" name="review[comment]" class="form-control" rows="4"
+                              minlength="10" maxlength="1000" required
+                              placeholder="Share what future guests should know (10–1000 characters)."></textarea>
+                </div>
+                <button class="btn btn-dark rounded-pill px-4" type="submit">Post review</button>
+            </form>
+        <% } else { %>
+            <p><a href="/login">Log in</a> to share a review.</p>
+        <% } %>
+
+        <div class="row g-3 mt-2">
+            <% for (const review of listing.reviews) { %>
+                <div class="col-md-6">
+                    <article class="card review-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between gap-2">
+                                <div>
+                                    <h3 class="h6 mb-1"><%= review.author ? review.author.username : "Guest" %></h3>
+                                    <small class="text-muted"><%= review.createdAt.toLocaleDateString() %></small>
+                                </div>
+                                <span class="badge text-bg-warning align-self-start">★ <%= review.rating %>/5</span>
+                            </div>
+                            <p class="card-text mt-3"><%= review.comment %></p>
+                            <% if (currUser && review.author && review.author._id.equals(currUser._id)) { %>
+                                <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                      method="POST">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Delete my review</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    </article>
+                </div>
+            <% } %>
+        </div>
+        <% if (!listing.reviews.length) { %>
+            <p class="text-muted">No reviews yet.</p>
+        <% } %>
+    </section>
+
+    <aside class="col-lg-5">
+        <% if (restaurantRecommendations) { %>
+            <div class="restaurant-recommendations">
+                <span class="section-tag">Local dining ideas</span>
+                <h2 class="h4">Restaurants in <%= restaurantRecommendations.name %></h2>
+                <p class="text-muted small">Curated suggestions, not live availability or ratings. Check current details before visiting.</p>
+                <% for (const restaurant of restaurantRecommendations.restaurants) { %>
+                    <article class="restaurant-card">
+                        <img class="restaurant-thumbnail" src="<%= restaurant.image.url %>"
+                             alt="<%= restaurant.image.alt %>" loading="lazy">
+                        <div class="restaurant-card-content">
+                            <h3 class="h6 mb-1"><%= restaurant.name %></h3>
+                            <p class="mb-0 text-muted"><%= restaurant.cuisine %> · <%= restaurant.area %></p>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=<%= encodeURIComponent(restaurant.name + ' ' + restaurant.area + ' ' + restaurantRecommendations.name) %>"
+                           target="_blank" rel="noopener noreferrer"
+                           aria-label="Find <%= restaurant.name %> on Google Maps">
+                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </article>
+                <% } %>
+                <a href="/restaurants?destination=<%= encodeURIComponent(restaurantRecommendations.name) %>"
+                   class="btn btn-outline-dark rounded-pill mt-3">See all dining ideas</a>
+            </div>
+        <% } else { %>
+            <div class="restaurant-recommendations">
+                <h2 class="h5">Looking for local food?</h2>
+                <p class="text-muted">Browse curated restaurant ideas in Goa, Manali, and Jaipur.</p>
+                <a href="/restaurants" class="btn btn-outline-dark rounded-pill">Explore restaurants</a>
+            </div>
+        <% } %>
+    </aside>
+</div>
