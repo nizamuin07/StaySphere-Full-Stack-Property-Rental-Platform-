@@ -4,6 +4,12 @@ StaySphere is a full-stack property rental and property listing web application 
 
 The application is built using **Node.js, Express.js, MongoDB, Mongoose, and EJS** with authentication, listing management, reviews, and curated restaurant discovery.
 
+## 🌐 Live Demo
+
+Open StaySphere: [https://staysphere-full-stack-property-rental.onrender.com](https://staysphere-full-stack-property-rental.onrender.com)
+
+The public homepage and curated restaurant pages are available without signing in. Database-backed features such as registration, login, and property listings require the Render service to have a valid MongoDB Atlas connection.
+
 ---
 
 ## ✨ Features
