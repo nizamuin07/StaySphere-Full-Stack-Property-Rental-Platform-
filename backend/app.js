@@ -59,6 +59,10 @@ function createApp(store) {
         next();
     });
 
+    app.get("/healthz", (req, res) => {
+        res.status(200).json({ status: "ok" });
+    });
+
     app.get("/", (req, res) => {
         res.render("home");
     });

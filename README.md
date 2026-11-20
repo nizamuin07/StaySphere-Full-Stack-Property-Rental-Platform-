@@ -226,6 +226,25 @@ CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 
 For MongoDB Atlas, set `MONGODB_URI` to your Atlas connection string (or keep using `ATLAS_DB_URL`). `MONGODB_URI` takes precedence for local development. Do not commit `.env` to GitHub.
 
+### Render Deployment
+
+Deploy this repository as a Render Web Service with:
+
+```text
+Build Command: npm install
+Start Command: npm start
+Health Check Path: /healthz
+```
+
+Configure these environment variables in the Render service:
+
+- `MONGODB_URI` - MongoDB Atlas connection string
+- `SECRET` - a long random session secret
+- `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` - optional image-upload credentials
+- `NODE_ENV=production`
+
+Render can provision the service from `render.yaml`. Confirm the service status and deployment logs after changing environment variables, then redeploy.
+
 ---
 
 ## ▶️ Run the Application Locally
