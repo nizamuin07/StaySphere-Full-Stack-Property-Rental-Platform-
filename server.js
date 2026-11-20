@@ -15,17 +15,25 @@ async function startServer() {
         throw new Error("Set SECRET before starting StaySphere.");
     }
 
-    await mongoose.connect(mongoUrl);
-    console.log("Connected to StaySphere database");
+    let store;
+    try {
+        await mongoose.connect(mongoUrl, {
+            serverSelectionTimeoutMS: 15000,
+        });
+        console.log("Connected to StaySphere database");
 
-    const store = MongoStore.create({
-        clientPromise: Promise.resolve(mongoose.connection.getClient()),
-        crypto: { secret: process.env.SECRET },
-        touchAfter: 24 * 60 * 60,
-    });
-    store.on("error", (error) => {
-        console.error("MongoDB session store error:", error.message);
-    });
+        store = MongoStore.create({
+            clientPromise: Promise.resolve(mongoose.connection.getClient()),
+            crypto: { secret: process.env.SECRET },
+            touchAfter: 24 * 60 * 60,
+        });
+        store.on("error", (error) => {
+            console.error("MongoDB session store error:", error.message);
+        });
+    } catch (error) {
+        console.error("StaySphere database unavailable:", error.message);
+        console.error("Starting StaySphere in degraded mode; database-backed features will be unavailable.");
+    }
 
     const app = createApp(store);
     const port = process.env.PORT || 8080;
